@@ -1,5 +1,5 @@
 {
-  "name": "university-management-core-service",
+  "name": "computer-repair-it-services",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.ts",
@@ -12,7 +12,7 @@
     "lint-prettier": "yarn lint:check && yarn prettier:check",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Programming Hero",
+  "author": "Tanjin Hossain",
   "license": "ISC",
   "lint-staged": {
     "src/**/*.ts": "yarn lint-prettier"
@@ -31,6 +31,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@prisma/client": "^5.4.2",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.3",
     "@types/jsonwebtoken": "^9.0.2",
