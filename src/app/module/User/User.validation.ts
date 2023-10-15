@@ -28,9 +28,7 @@ const create = z.object({
         }),
         emergencyContactNo: z.string().optional(),
         presentAddress: z.string().optional(),
-        permanentAddress: z.string({
-            required_error: "Permanent Address Is Required"
-        }),
+        permanentAddress: z.string().optional(),
         roleBasedPermission: z.string().optional(),
         profileImage: z.string().optional(),
     })

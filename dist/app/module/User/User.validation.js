@@ -30,9 +30,7 @@ const create = zod_1.z.object({
         }),
         emergencyContactNo: zod_1.z.string().optional(),
         presentAddress: zod_1.z.string().optional(),
-        permanentAddress: zod_1.z.string({
-            required_error: "Permanent Address Is Required"
-        }),
+        permanentAddress: zod_1.z.string().optional(),
         roleBasedPermission: zod_1.z.string().optional(),
         profileImage: zod_1.z.string().optional(),
     })

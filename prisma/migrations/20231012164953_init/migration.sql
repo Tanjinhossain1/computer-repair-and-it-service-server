@@ -1,7 +1,0 @@
--- AlterTable
-ALTER TABLE "User" ALTER COLUMN "middleName" DROP NOT NULL,
-ALTER COLUMN "gender" DROP NOT NULL,
-ALTER COLUMN "bloodGroup" DROP NOT NULL,
-ALTER COLUMN "emergencyContactNo" DROP NOT NULL,
-ALTER COLUMN "presentAddress" DROP NOT NULL,
-ALTER COLUMN "profileImage" DROP NOT NULL;

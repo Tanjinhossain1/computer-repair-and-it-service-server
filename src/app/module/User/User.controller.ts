@@ -3,6 +3,7 @@ import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import { UserServices } from "./User.service";
+import pick from "../../../shared/pick";
 
 const CreateUser = catchAsync(async (req: Request, res: Response) => {
     const result = await UserServices.CreateUser(req.body);
@@ -15,22 +16,41 @@ const CreateUser = catchAsync(async (req: Request, res: Response) => {
 });
 
 const GetAllNormalUser = catchAsync(async (req: Request, res: Response) => {
-    const result = await UserServices.GetAllNormalUser();
+    // const result = await UserServices.GetAllNormalUser();
+    // sendResponse(res, {
+    //     statusCode: httpStatus.OK,
+    //     success: true,
+    //     message: 'Get All Users',
+    //     data: result
+    // }); 
+ const UserSearchFields = ['searchTerm', 'email', "firstName","lastName","middleName","role","contactNo","gender"];
+
+    const filters = pick(req.query, UserSearchFields);
+    const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+
+    const result = await UserServices.GetAllNormalUser(filters, options);
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
-        message: 'Get All Users',
-        data: result
-    });
+        message: "GET All User!!",
+        meta: result.meta,
+        data: result.data
+    })
 });
 
 const GetAllAdmin = catchAsync(async (req: Request, res: Response) => {
-    const result = await UserServices.GetAllAdmin();
+ const adminSearchFields = ['searchTerm', 'email', "firstName","lastName","middleName","role","contactNo","gender"];
+
+    const filters = pick(req.query, adminSearchFields);
+    const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+
+    const result = await UserServices.GetAllAdmin(filters, options);
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
         message: 'Get All Admins',
-        data: result
+        meta: result.meta,
+        data: result.data
     });
 });
 

@@ -3,8 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated/client"
-
+  // output   = "./generated/client"
 }
 
 datasource db {
@@ -19,16 +18,29 @@ model User {
   firstName           String
   lastName            String
   middleName          String?
-  dateOfBirth         DateTime
+  dateOfBirth         String
   gender              String?
   bloodGroup          String?
-  email               String @unique
+  email               String   @unique
   contactNo           String
   emergencyContactNo  String?
   presentAddress      String?
-  permanentAddress    String
+  permanentAddress    String?
   roleBasedPermission String?
   profileImage        String?
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt
+  createAt            DateTime @default(now())
+  updateAt            DateTime @updatedAt
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  image       String
+  price       Int
+  status      String
+  category    String
+  createAt    DateTime @default(now())
+  updateAt    DateTime @updatedAt
+  rating      Int?
 }
