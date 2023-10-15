@@ -31,7 +31,7 @@ const GetAllServices = catchAsync(async (req: Request, res: Response) => {
        })
    });
 const GetAllAvailableServices = catchAsync(async (req: Request, res: Response) => { 
-    const UserSearchFields = ['searchTerm', 'title', "status","category","createAt","updateAt",'minPrice','maxPrice'];
+    const UserSearchFields = ['searchTerm', 'title', "status","category",'minPrice','maxPrice'];
    
        const filters = pick(req.query, UserSearchFields);
        const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
@@ -46,7 +46,7 @@ const GetAllAvailableServices = catchAsync(async (req: Request, res: Response) =
        })
    });
 const GetAllUpComingServices = catchAsync(async (req: Request, res: Response) => { 
-    const UserSearchFields = ['searchTerm', 'title', "status","category","createAt","updateAt",'minPrice','maxPrice'];
+    const UserSearchFields = ['searchTerm', 'title', "status","category","description",'minPrice','maxPrice'];
    
        const filters = pick(req.query, UserSearchFields);
        const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);

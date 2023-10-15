@@ -12,7 +12,7 @@ datasource db {
 }
 
 model User {
-  id                  Int      @id @default(autoincrement())
+  id                  Int       @id @default(autoincrement())
   password            String
   role                String
   firstName           String
@@ -21,26 +21,59 @@ model User {
   dateOfBirth         String
   gender              String?
   bloodGroup          String?
-  email               String   @unique
+  email               String    @unique
   contactNo           String
   emergencyContactNo  String?
   presentAddress      String?
   permanentAddress    String?
   roleBasedPermission String?
   profileImage        String?
-  createAt            DateTime @default(now())
-  updateAt            DateTime @updatedAt
+  createAt            DateTime  @default(now())
+  updateAt            DateTime  @updatedAt
+  booking             Booking[]
 }
 
 model Service {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   title       String
   description String
   image       String
   price       Int
   status      String
   category    String
-  createAt    DateTime @default(now())
-  updateAt    DateTime @updatedAt
+  createAt    DateTime  @default(now())
+  updateAt    DateTime  @updatedAt
   rating      Int?
+  booking     Booking[]
+}
+
+model Booking {
+  id         Int      @id @default(autoincrement())
+  serviceId  Int
+  userId     Int
+  startDate  DateTime
+  endDate    DateTime
+  bookStatus String
+  service    Service  @relation(fields: [serviceId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+  createAt   DateTime @default(now())
+  updateAt   DateTime @updatedAt
+}
+
+model BlogPost {
+  id                  Int      @id @default(autoincrement())
+  title               String
+  topShortDescription String
+  image               String
+  description         String
+  createAt            DateTime @default(now())
+  updateAt            DateTime @updatedAt
+}
+
+model Faqs {
+  id       Int      @id @default(autoincrement())
+  question String
+  ans      String
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
 }

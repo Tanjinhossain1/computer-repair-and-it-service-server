@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BlogPostRoute = void 0;
+const express_1 = __importDefault(require("express"));
+const user_1 = require("../../../enums/user");
+const auth_1 = __importDefault(require("../../middlewares/auth"));
+const validateRequest_1 = __importDefault(require("../../middlewares/validateRequest"));
+const blogPost_validation_1 = require("./blogPost.validation");
+const blogPost_controller_1 = require("./blogPost.controller");
+const router = express_1.default.Router();
+router.post('/create', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), (0, validateRequest_1.default)(blogPost_validation_1.BlogPostValidation.create), blogPost_controller_1.BlogPostController.CreateBlogPost);
+router.post('/faqs/create', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), (0, validateRequest_1.default)(blogPost_validation_1.BlogPostValidation.createFaqs), blogPost_controller_1.BlogPostController.CreateFaqs);
+router.get('/faqs', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), blogPost_controller_1.BlogPostController.GetAllFaqs);
+router.get('/', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), blogPost_controller_1.BlogPostController.GetAllBlogPost);
+router.get('/:id', blogPost_controller_1.BlogPostController.GetOneBlogPost);
+router.delete('/delete/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), blogPost_controller_1.BlogPostController.DeleteBlogPost);
+router.delete('/faqs/delete/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN), blogPost_controller_1.BlogPostController.DeleteFaqs);
+exports.BlogPostRoute = router;

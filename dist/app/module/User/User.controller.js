@@ -17,6 +17,7 @@ const http_status_1 = __importDefault(require("http-status"));
 const catchAsync_1 = __importDefault(require("../../../shared/catchAsync"));
 const sendResponse_1 = __importDefault(require("../../../shared/sendResponse"));
 const User_service_1 = require("./User.service");
+const pick_1 = __importDefault(require("../../../shared/pick"));
 const CreateUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield User_service_1.UserServices.CreateUser(req.body);
     (0, sendResponse_1.default)(res, {
@@ -27,21 +28,36 @@ const CreateUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     });
 }));
 const GetAllNormalUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield User_service_1.UserServices.GetAllNormalUser();
+    // const result = await UserServices.GetAllNormalUser();
+    // sendResponse(res, {
+    //     statusCode: httpStatus.OK,
+    //     success: true,
+    //     message: 'Get All Users',
+    //     data: result
+    // }); 
+    const UserSearchFields = ['searchTerm', 'email', "firstName", "lastName", "middleName", "role", "contactNo", "gender"];
+    const filters = (0, pick_1.default)(req.query, UserSearchFields);
+    const options = (0, pick_1.default)(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+    const result = yield User_service_1.UserServices.GetAllNormalUser(filters, options);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: 'Get All Users',
-        data: result
+        message: "GET All User!!",
+        meta: result.meta,
+        data: result.data
     });
 }));
 const GetAllAdmin = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield User_service_1.UserServices.GetAllAdmin();
+    const adminSearchFields = ['searchTerm', 'email', "firstName", "lastName", "middleName", "role", "contactNo", "gender"];
+    const filters = (0, pick_1.default)(req.query, adminSearchFields);
+    const options = (0, pick_1.default)(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+    const result = yield User_service_1.UserServices.GetAllAdmin(filters, options);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
         message: 'Get All Admins',
-        data: result
+        meta: result.meta,
+        data: result.data
     });
 }));
 const UpdateUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
