@@ -30,6 +30,7 @@ export const GetAllBooking = async (
             },
             include:{
                 service: true,
+                user:true,
             }
     });
 
