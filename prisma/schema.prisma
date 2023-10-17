@@ -41,6 +41,7 @@ model Service {
   price       Int
   status      String
   category    String
+  serviceLocation    String
   createAt    DateTime  @default(now())
   updateAt    DateTime  @updatedAt
   rating      Int?

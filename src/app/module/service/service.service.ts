@@ -14,7 +14,7 @@ const CreateService = async (data: Service) => {
 
 export const GetAllServices = async (filters: { searchTerm?: string,minPrice?:string,maxPrice?:string },
     options: IPaginationOptions) => {
-    const serviceSearchAbleFields = ['title', "status", "category","description"];
+    const serviceSearchAbleFields = ['title', "status", "category","description",'serviceLocation'];
 
     const { page, limit, skip } = paginationHelpers.calculatePagination(options);
     const { searchTerm,minPrice,maxPrice, ...filterData } = filters;
@@ -144,7 +144,7 @@ export const DeleteService = async (id: number) => {
 
 export const GetAllAvailableServices = async (filters: { searchTerm?: string,minPrice?:string,maxPrice?:string },
     options: IPaginationOptions) => {
-    const serviceSearchAbleFields = ['title', "status", "category",'description'];
+    const serviceSearchAbleFields = ['title', "status", "category",'description','serviceLocation'];
 
     const { page, limit, skip } = paginationHelpers.calculatePagination(options);
     const { searchTerm,minPrice,maxPrice, ...filterData } = filters;
@@ -220,7 +220,7 @@ export const GetAllAvailableServices = async (filters: { searchTerm?: string,min
 }
 export const GetAllUpComingServices = async (filters: { searchTerm?: string,minPrice?:string,maxPrice?:string  },
     options: IPaginationOptions) => {
-    const serviceSearchAbleFields = ['title', "status", "category",'description'];
+    const serviceSearchAbleFields = ['title', "status", "category",'description','serviceLocation'];
 
     const { page, limit, skip } = paginationHelpers.calculatePagination(options);
     const { searchTerm,minPrice,maxPrice, ...filterData } = filters;

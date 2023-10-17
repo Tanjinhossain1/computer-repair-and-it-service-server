@@ -26,12 +26,12 @@ router.get(
 
 router.get(
     '/profile/:id',
-    auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
+    auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN,ENUM_USER_ROLE.USER),
     UserController.GetProfileDetail
 );
 router.patch(
     '/update/:id',
-    auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN), 
+    auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN,ENUM_USER_ROLE.USER), 
     validateRequest(UserValidation.update),
     UserController.UpdateUser
 );

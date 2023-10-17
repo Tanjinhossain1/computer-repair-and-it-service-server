@@ -20,6 +20,9 @@ const create = z.object({
         category: z.string({
             required_error: "category is required"
         }),
+        serviceLocation: z.string({
+            required_error: "location is required"
+        }),
         rating: z.number().optional(),
     })
 });
@@ -34,6 +37,7 @@ const update = z.object({
         status: z.string().optional(),
         category: z.string().optional(),
         rating: z.number().optional(),
+        serviceLocation: z.string().optional(),
     })
 });
 

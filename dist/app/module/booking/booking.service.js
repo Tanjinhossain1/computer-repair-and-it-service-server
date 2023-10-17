@@ -37,6 +37,7 @@ const GetAllBooking = (options) => __awaiter(void 0, void 0, void 0, function* (
             },
         include: {
             service: true,
+            user: true,
         }
     });
     const total = result.length;

@@ -15,14 +15,7 @@ const CreateUser = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
-const GetAllNormalUser = catchAsync(async (req: Request, res: Response) => {
-    // const result = await UserServices.GetAllNormalUser();
-    // sendResponse(res, {
-    //     statusCode: httpStatus.OK,
-    //     success: true,
-    //     message: 'Get All Users',
-    //     data: result
-    // }); 
+const GetAllNormalUser = catchAsync(async (req: Request, res: Response) => { 
  const UserSearchFields = ['searchTerm', 'email', "firstName","lastName","middleName","role","contactNo","gender"];
 
     const filters = pick(req.query, UserSearchFields);
