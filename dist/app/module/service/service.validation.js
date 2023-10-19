@@ -40,7 +40,18 @@ const update = zod_1.z.object({
         serviceLocation: zod_1.z.string().optional(),
     })
 });
+const addToCart = zod_1.z.object({
+    body: zod_1.z.object({
+        userId: zod_1.z.number({
+            required_error: "User Id Is Required"
+        }),
+        serviceId: zod_1.z.number({
+            required_error: "Service Id Is Required"
+        })
+    })
+});
 exports.ServiceValidation = {
     create,
-    update
+    update,
+    addToCart
 };

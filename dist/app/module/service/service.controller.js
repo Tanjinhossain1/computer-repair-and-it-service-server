@@ -27,6 +27,24 @@ const CreateService = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
         data: result
     });
 }));
+const CreateAddToCart = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield service_service_1.ServiceService.CreateAddToCart(req.body);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: 'Add TO Cart Created',
+        data: result
+    });
+}));
+const GetAllAddToCart = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield service_service_1.ServiceService.GetAllAddToCart(+req.params.id);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: 'Get All Add To Cart',
+        data: result
+    });
+}));
 const GetAllServices = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const UserSearchFields = ['searchTerm', 'title', "status", "category", "createAt", 'serviceLocation', "updateAt", 'minPrice', 'maxPrice'];
     const filters = (0, pick_1.default)(req.query, UserSearchFields);
@@ -100,5 +118,7 @@ exports.ServiceController = {
     UpdateService,
     DeleteService,
     GetAllAvailableServices,
-    GetAllUpComingServices
+    GetAllUpComingServices,
+    CreateAddToCart,
+    GetAllAddToCart
 };

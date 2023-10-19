@@ -12,6 +12,8 @@ const service_controller_1 = require("./service.controller");
 const service_validation_1 = require("./service.validation");
 const router = express_1.default.Router();
 router.post('/create', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN), (0, validateRequest_1.default)(service_validation_1.ServiceValidation.create), service_controller_1.ServiceController.CreateService);
+router.post('/add-to-cart', (0, auth_1.default)(user_1.ENUM_USER_ROLE.USER, user_1.ENUM_USER_ROLE.ADMIN), (0, validateRequest_1.default)(service_validation_1.ServiceValidation.addToCart), service_controller_1.ServiceController.CreateAddToCart);
+router.get('/add-to-cart/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), service_controller_1.ServiceController.GetAllAddToCart);
 router.get('/', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), service_controller_1.ServiceController.GetAllServices);
 router.get('/available', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), service_controller_1.ServiceController.GetAllAvailableServices);
 router.get('/up-coming', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), service_controller_1.ServiceController.GetAllUpComingServices);

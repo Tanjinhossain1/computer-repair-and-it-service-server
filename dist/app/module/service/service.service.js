@@ -34,6 +34,33 @@ const CreateService = (data) => __awaiter(void 0, void 0, void 0, function* () {
     });
     return result;
 });
+const CreateAddToCart = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    const isExist = yield prisma_1.default.addToCart.findFirst({
+        where: {
+            userId: data.userId,
+            serviceId: data.serviceId
+        }
+    });
+    if (isExist) {
+        throw new ApiError_1.default(http_status_1.default.NOT_FOUND, 'This Service Already Added In cart');
+    }
+    const result = yield prisma_1.default.addToCart.create({
+        data,
+    });
+    return result;
+});
+const GetAllAddToCart = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield prisma_1.default.addToCart.findMany({
+        where: {
+            userId: userId
+        },
+        include: {
+            user: true,
+            service: true,
+        }
+    });
+    return result;
+});
 const GetAllServices = (filters, options) => __awaiter(void 0, void 0, void 0, function* () {
     const serviceSearchAbleFields = ['title', "status", "category", "description", 'serviceLocation'];
     const { page, limit, skip } = paginationHelper_1.paginationHelpers.calculatePagination(options);
@@ -292,5 +319,7 @@ exports.ServiceService = {
     UpdateService: exports.UpdateService,
     DeleteService: exports.DeleteService,
     GetAllAvailableServices: exports.GetAllAvailableServices,
-    GetAllUpComingServices: exports.GetAllUpComingServices
+    GetAllUpComingServices: exports.GetAllUpComingServices,
+    CreateAddToCart,
+    GetAllAddToCart
 };
