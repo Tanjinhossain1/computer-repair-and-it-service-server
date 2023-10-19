@@ -38,7 +38,7 @@ const GetAllBooking = catchAsync(async (req: Request, res: Response) => {
        })
    });
 const GetAllReviews = catchAsync(async (req: Request, res: Response) => { 
-       const result = await BookingService.GetAllReviews();
+       const result = await BookingService.GetAllReviews(+req.params.id);
        sendResponse(res, {
            statusCode: httpStatus.OK,
            success: true,

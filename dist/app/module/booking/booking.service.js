@@ -29,8 +29,11 @@ const CreateReview = (data) => __awaiter(void 0, void 0, void 0, function* () {
     });
     return result;
 });
-const GetAllReviews = () => __awaiter(void 0, void 0, void 0, function* () {
+const GetAllReviews = (serviceId) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma_1.default.review.findMany({
+        where: {
+            serviceId
+        },
         include: {
             user: true
         }

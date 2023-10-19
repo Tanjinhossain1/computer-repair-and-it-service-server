@@ -20,8 +20,11 @@ const CreateReview = async (data: Review) => {
 }
 
 
-const GetAllReviews = async () => {
+const GetAllReviews = async (serviceId:number) => {
     const result = await prisma.review.findMany({
+        where:{
+            serviceId
+        },
         include:{
             user: true
         }
