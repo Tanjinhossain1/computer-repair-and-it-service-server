@@ -28,7 +28,7 @@ const CreateService = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
     });
 }));
 const GetAllServices = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const UserSearchFields = ['searchTerm', 'title', "status", "category", "createAt", "updateAt", 'minPrice', 'maxPrice'];
+    const UserSearchFields = ['searchTerm', 'title', "status", "category", "createAt", 'serviceLocation', "updateAt", 'minPrice', 'maxPrice'];
     const filters = (0, pick_1.default)(req.query, UserSearchFields);
     const options = (0, pick_1.default)(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
     const result = yield service_service_1.ServiceService.GetAllServices(filters, options);
@@ -41,7 +41,7 @@ const GetAllServices = (0, catchAsync_1.default)((req, res) => __awaiter(void 0,
     });
 }));
 const GetAllAvailableServices = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const UserSearchFields = ['searchTerm', 'title', "status", "category", 'minPrice', 'maxPrice'];
+    const UserSearchFields = ['searchTerm', 'title', "status", "category", 'serviceLocation', 'minPrice', 'maxPrice'];
     const filters = (0, pick_1.default)(req.query, UserSearchFields);
     const options = (0, pick_1.default)(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
     const result = yield service_service_1.ServiceService.GetAllAvailableServices(filters, options);
@@ -54,7 +54,7 @@ const GetAllAvailableServices = (0, catchAsync_1.default)((req, res) => __awaite
     });
 }));
 const GetAllUpComingServices = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const UserSearchFields = ['searchTerm', 'title', "status", "category", "description", 'minPrice', 'maxPrice'];
+    const UserSearchFields = ['searchTerm', 'title', "status", "category", "serviceLocation", "description", 'minPrice', 'maxPrice'];
     const filters = (0, pick_1.default)(req.query, UserSearchFields);
     const options = (0, pick_1.default)(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
     const result = yield service_service_1.ServiceService.GetAllUpComingServices(filters, options);

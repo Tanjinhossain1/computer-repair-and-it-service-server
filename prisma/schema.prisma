@@ -31,21 +31,24 @@ model User {
   createAt            DateTime  @default(now())
   updateAt            DateTime  @updatedAt
   booking             Booking[]
+  review              Review[]
+  feedback Feedback[]
 }
 
 model Service {
-  id          Int       @id @default(autoincrement())
-  title       String
-  description String
-  image       String
-  price       Int
-  status      String
-  category    String
-  serviceLocation    String
-  createAt    DateTime  @default(now())
-  updateAt    DateTime  @updatedAt
-  rating      Int?
-  booking     Booking[]
+  id              Int       @id @default(autoincrement())
+  title           String
+  description     String
+  image           String
+  price           Int
+  status          String
+  category        String
+  serviceLocation String
+  createAt        DateTime  @default(now())
+  updateAt        DateTime  @updatedAt
+  rating          Int?
+  booking         Booking[]
+  review          Review[]
 }
 
 model Booking {
@@ -77,4 +80,26 @@ model Faqs {
   ans      String
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  serviceId Int
+  userId    Int
+  review String
+  rating Int?
+  service   Service  @relation(fields: [serviceId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  createAt  DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model Feedback {
+  id        Int      @id @default(autoincrement()) 
+  userId    Int
+  comment String?
+  suggestion String?
+  user      User     @relation(fields: [userId], references: [id])
+  createAt  DateTime @default(now())
+  updateAt  DateTime @updatedAt
 }

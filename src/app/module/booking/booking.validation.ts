@@ -31,7 +31,24 @@ const update = z.object({
     })
 });
 
+
+const reviewCreate = z.object({
+    body: z.object({
+        serviceId: z.number({
+            required_error:"service id is required"
+        }),
+        userId: z.number({
+            required_error:"user id is required"
+        }),
+        review: z.string({
+            required_error:"review is required"
+        }), 
+        rating: z.number().optional(), 
+    })
+}); 
+  
 export const BookingValidation = {
     create,
-    update
+    update,
+    reviewCreate
 };

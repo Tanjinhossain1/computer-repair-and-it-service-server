@@ -22,6 +22,9 @@ const create = zod_1.z.object({
         category: zod_1.z.string({
             required_error: "category is required"
         }),
+        serviceLocation: zod_1.z.string({
+            required_error: "location is required"
+        }),
         rating: zod_1.z.number().optional(),
     })
 });
@@ -34,6 +37,7 @@ const update = zod_1.z.object({
         status: zod_1.z.string().optional(),
         category: zod_1.z.string().optional(),
         rating: zod_1.z.number().optional(),
+        serviceLocation: zod_1.z.string().optional(),
     })
 });
 exports.ServiceValidation = {

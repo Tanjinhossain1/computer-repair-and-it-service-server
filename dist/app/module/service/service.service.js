@@ -35,7 +35,7 @@ const CreateService = (data) => __awaiter(void 0, void 0, void 0, function* () {
     return result;
 });
 const GetAllServices = (filters, options) => __awaiter(void 0, void 0, void 0, function* () {
-    const serviceSearchAbleFields = ['title', "status", "category", "description"];
+    const serviceSearchAbleFields = ['title', "status", "category", "description", 'serviceLocation'];
     const { page, limit, skip } = paginationHelper_1.paginationHelpers.calculatePagination(options);
     const { searchTerm, minPrice, maxPrice } = filters, filterData = __rest(filters, ["searchTerm", "minPrice", "maxPrice"]);
     console.log(options);
@@ -150,7 +150,7 @@ const DeleteService = (id) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.DeleteService = DeleteService;
 const GetAllAvailableServices = (filters, options) => __awaiter(void 0, void 0, void 0, function* () {
-    const serviceSearchAbleFields = ['title', "status", "category", 'description'];
+    const serviceSearchAbleFields = ['title', "status", "category", 'description', 'serviceLocation'];
     const { page, limit, skip } = paginationHelper_1.paginationHelpers.calculatePagination(options);
     const { searchTerm, minPrice, maxPrice } = filters, filterData = __rest(filters, ["searchTerm", "minPrice", "maxPrice"]);
     console.log(options);
@@ -218,7 +218,7 @@ const GetAllAvailableServices = (filters, options) => __awaiter(void 0, void 0, 
 });
 exports.GetAllAvailableServices = GetAllAvailableServices;
 const GetAllUpComingServices = (filters, options) => __awaiter(void 0, void 0, void 0, function* () {
-    const serviceSearchAbleFields = ['title', "status", "category", 'description'];
+    const serviceSearchAbleFields = ['title', "status", "category", 'description', 'serviceLocation'];
     const { page, limit, skip } = paginationHelper_1.paginationHelpers.calculatePagination(options);
     const { searchTerm, minPrice, maxPrice } = filters, filterData = __rest(filters, ["searchTerm", "minPrice", "maxPrice"]);
     console.log(options);

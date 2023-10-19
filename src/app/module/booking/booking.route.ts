@@ -16,11 +16,28 @@ router.post(
     validateRequest(BookingValidation.create),
     BookingController.CreateBooking
 ); 
+router.post(
+    '/review',
+    auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN,ENUM_USER_ROLE.USER),
+    validateRequest(BookingValidation.reviewCreate),
+    BookingController.CreateReview
+); 
+router.get(
+    '/review',
+    auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN,ENUM_USER_ROLE.USER),
+    BookingController.GetAllReviews
+); 
 
 router.get(
     '/',
     auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN,ENUM_USER_ROLE.USER),
     BookingController.GetAllBooking
+);  
+
+router.get(
+    '/:userId/:serviceId',
+    auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN,ENUM_USER_ROLE.USER),
+    BookingController.IsServiceAlreadyBookThisUser
 );  
 
 router.get(

@@ -15,6 +15,16 @@ const CreateBooking = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const CreateReview = catchAsync(async (req: Request, res: Response) => {
+    const result = await BookingService.CreateReview(req.body);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Create Review',
+        data: result
+    });
+});
+
 const GetAllBooking = catchAsync(async (req: Request, res: Response) => { 
        const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
    
@@ -27,6 +37,24 @@ const GetAllBooking = catchAsync(async (req: Request, res: Response) => {
            data: result.data
        })
    });
+const GetAllReviews = catchAsync(async (req: Request, res: Response) => { 
+       const result = await BookingService.GetAllReviews();
+       sendResponse(res, {
+           statusCode: httpStatus.OK,
+           success: true,
+           message: "GET All Reviews!!", 
+           data: result
+       })
+   });
+const IsServiceAlreadyBookThisUser = catchAsync(async (req: Request, res: Response) => {  
+       const result = await BookingService.IsServiceAlreadyBookThisUser(+req.params.userId,+req.params.serviceId);
+       sendResponse(res, {
+           statusCode: httpStatus.OK,
+           success: true,
+           message: "Service Already Book This User!!", 
+           data: result
+       })
+   });
 
 const GetUserOwnBooking = catchAsync(async (req: Request, res: Response) => { 
        const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
@@ -35,7 +63,7 @@ const GetUserOwnBooking = catchAsync(async (req: Request, res: Response) => {
        sendResponse(res, {
            statusCode: httpStatus.OK,
            success: true,
-           message: "GET All Booking Services!!",
+           message: "GET User Booking!!",
            meta: result.meta,
            data: result.data
        })
@@ -66,5 +94,8 @@ export const BookingController = {
     GetAllBooking,
     GetUserOwnBooking,
     UpdateBooking,
-    DeleteBooking
+    DeleteBooking,
+    IsServiceAlreadyBookThisUser,
+    CreateReview,
+    GetAllReviews
 }

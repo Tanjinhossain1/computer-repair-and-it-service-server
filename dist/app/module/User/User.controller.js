@@ -28,13 +28,6 @@ const CreateUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     });
 }));
 const GetAllNormalUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // const result = await UserServices.GetAllNormalUser();
-    // sendResponse(res, {
-    //     statusCode: httpStatus.OK,
-    //     success: true,
-    //     message: 'Get All Users',
-    //     data: result
-    // }); 
     const UserSearchFields = ['searchTerm', 'email', "firstName", "lastName", "middleName", "role", "contactNo", "gender"];
     const filters = (0, pick_1.default)(req.query, UserSearchFields);
     const options = (0, pick_1.default)(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);

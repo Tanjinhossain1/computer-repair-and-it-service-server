@@ -1,4 +1,4 @@
-import { Booking } from "@prisma/client";
+import { Booking, Review } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import { IPaginationOptions } from "../../../interfaces/pagination";
 import { paginationHelpers } from "../../../helpers/paginationHelper";
@@ -8,6 +8,23 @@ import httpStatus from "http-status";
 const CreateBooking = async (data: Booking) => {
     const result = await prisma.booking.create({
         data,
+    });
+    return result;
+}
+
+const CreateReview = async (data: Review) => {
+    const result = await prisma.review.create({
+        data,
+    });
+    return result;
+}
+
+
+const GetAllReviews = async () => {
+    const result = await prisma.review.findMany({
+        include:{
+            user: true
+        }
     });
     return result;
 }
@@ -28,10 +45,10 @@ export const GetAllBooking = async (
             : {
                 createAt: 'desc'
             },
-            include:{
-                service: true,
-                user:true,
-            }
+        include: {
+            service: true,
+            user: true,
+        }
     });
 
     const total = result.length
@@ -48,11 +65,19 @@ export const GetAllBooking = async (
 
 export const GetUserOwnBooking = async (userId: number,
     options: IPaginationOptions) => {
-
+        const isUserExist = await prisma.user.findUnique({
+            where: {
+                id: userId
+            }
+        });
+    
+        if (!isUserExist) {
+            throw new ApiError(httpStatus.NOT_FOUND, 'User does not exist');
+        }
     const { page, limit, skip } = paginationHelpers.calculatePagination(options);
 
     const result = await prisma.booking.findMany({
-        where: { userId },
+        where: { userId: userId },
         skip,
         take: limit,
         orderBy: options.sortBy && options.sortOrder
@@ -62,9 +87,9 @@ export const GetUserOwnBooking = async (userId: number,
             : {
                 createAt: 'desc'
             },
-            include:{
-                service: true,
-            }
+        include: {
+            service: true,
+        }
     });
 
     const total = result.length
@@ -98,6 +123,19 @@ export const UpdateBooking = async (id: number, payload: Partial<Booking>) => {
     })
     return result
 }
+export const IsServiceAlreadyBookThisUser = async (userId: number, serviceId: number) => {
+    const result = await prisma.booking.findFirst({
+        where: { 
+              userId,
+              serviceId, 
+          },
+      });
+    
+      return result;
+
+
+    return result
+}
 export const DeleteBooking = async (id: number) => {
     const isUserExist = await prisma.booking.findUnique({
         where: {
@@ -112,7 +150,7 @@ export const DeleteBooking = async (id: number) => {
     const result = await prisma.booking.delete({
         where: {
             id
-        }, 
+        },
     })
     return result
 }
@@ -122,5 +160,8 @@ export const BookingService = {
     GetAllBooking,
     GetUserOwnBooking,
     UpdateBooking,
-    DeleteBooking
+    DeleteBooking,
+    IsServiceAlreadyBookThisUser,
+    CreateReview,
+    GetAllReviews
 }

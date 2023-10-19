@@ -4,6 +4,7 @@ import { AuthRoute } from '../module/auth/auth.route';
 import { ServiceRoute } from '../module/service/service.route';
 import { BookingRoute } from '../module/booking/booking.route';
 import { BlogPostRoute } from '../module/blogPost/blogPost.route';
+import { FeedBackRoute } from '../module/Feedback/feedback.route';
 
 const router = express.Router();
 
@@ -27,6 +28,10 @@ const moduleRoutes = [
   {
     path: "/blogPost",
     route: BlogPostRoute
+  },
+  {
+    path: "/feedback",
+    route: FeedBackRoute
   },
 ];
 
