@@ -14,7 +14,7 @@ const router = express_1.default.Router();
 router.post('/create', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), (0, validateRequest_1.default)(blogPost_validation_1.BlogPostValidation.create), blogPost_controller_1.BlogPostController.CreateBlogPost);
 router.post('/faqs/create', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), (0, validateRequest_1.default)(blogPost_validation_1.BlogPostValidation.createFaqs), blogPost_controller_1.BlogPostController.CreateFaqs);
 router.get('/faqs', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), blogPost_controller_1.BlogPostController.GetAllFaqs);
-router.get('/', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), blogPost_controller_1.BlogPostController.GetAllBlogPost);
+router.get('/', blogPost_controller_1.BlogPostController.GetAllBlogPost);
 router.get('/:id', blogPost_controller_1.BlogPostController.GetOneBlogPost);
 router.delete('/delete/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN, user_1.ENUM_USER_ROLE.USER), blogPost_controller_1.BlogPostController.DeleteBlogPost);
 router.delete('/faqs/delete/:id', (0, auth_1.default)(user_1.ENUM_USER_ROLE.SUPER_ADMIN, user_1.ENUM_USER_ROLE.ADMIN), blogPost_controller_1.BlogPostController.DeleteFaqs);
