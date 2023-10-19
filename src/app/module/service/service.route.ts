@@ -32,23 +32,23 @@ router.get(
 
 router.get(
     '/',
-    auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN,ENUM_USER_ROLE.USER),
+    
     ServiceController.GetAllServices
 ); 
 router.get(
     '/available',
-    auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN,ENUM_USER_ROLE.USER),
+    
     ServiceController.GetAllAvailableServices
 ); 
 router.get(
     '/up-coming',
-    auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN,ENUM_USER_ROLE.USER),
+    
     ServiceController.GetAllUpComingServices
 ); 
 
 router.get(
     '/:id',
-    auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN,ENUM_USER_ROLE.USER),
+    
     ServiceController.GetOneService
 ); 
 
