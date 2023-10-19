@@ -17,6 +17,19 @@ router.post(
     ServiceController.CreateService
 ); 
 
+router.post(
+    '/add-to-cart',
+    auth(ENUM_USER_ROLE.USER,ENUM_USER_ROLE.ADMIN),
+    validateRequest(ServiceValidation.addToCart),
+    ServiceController.CreateAddToCart
+); 
+
+router.get(
+    '/add-to-cart/:id',
+    auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN,ENUM_USER_ROLE.USER),
+    ServiceController.GetAllAddToCart
+); 
+
 router.get(
     '/',
     auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN,ENUM_USER_ROLE.USER),

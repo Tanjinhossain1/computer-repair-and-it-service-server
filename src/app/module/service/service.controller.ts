@@ -14,6 +14,25 @@ const CreateService = catchAsync(async (req: Request, res: Response) => {
         data: result
     });
 });
+const CreateAddToCart = catchAsync(async (req: Request, res: Response) => {
+    const result = await ServiceService.CreateAddToCart(req.body);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Add TO Cart Created',
+        data: result
+    });
+});
+
+const GetAllAddToCart = catchAsync(async (req: Request, res: Response) => {
+    const result = await ServiceService.GetAllAddToCart(+req.params.id);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Get All Add To Cart',
+        data: result
+    });
+});
 
 const GetAllServices = catchAsync(async (req: Request, res: Response) => { 
     const UserSearchFields = ['searchTerm', 'title', "status","category","createAt",'serviceLocation',"updateAt",'minPrice','maxPrice'];
@@ -99,5 +118,7 @@ export const ServiceController = {
     UpdateService,
     DeleteService,
     GetAllAvailableServices,
-    GetAllUpComingServices
+    GetAllUpComingServices,
+    CreateAddToCart,
+    GetAllAddToCart
 }

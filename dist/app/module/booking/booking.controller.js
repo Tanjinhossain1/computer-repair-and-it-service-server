@@ -27,6 +27,15 @@ const CreateBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
         data: result
     });
 }));
+const CreateReview = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield booking_service_1.BookingService.CreateReview(req.body);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: 'Create Review',
+        data: result
+    });
+}));
 const GetAllBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const options = (0, pick_1.default)(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
     const result = yield booking_service_1.BookingService.GetAllBooking(options);
@@ -38,13 +47,31 @@ const GetAllBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
         data: result.data
     });
 }));
+const GetAllReviews = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield booking_service_1.BookingService.GetAllReviews();
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: "GET All Reviews!!",
+        data: result
+    });
+}));
+const IsServiceAlreadyBookThisUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield booking_service_1.BookingService.IsServiceAlreadyBookThisUser(+req.params.userId, +req.params.serviceId);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: "Service Already Book This User!!",
+        data: result
+    });
+}));
 const GetUserOwnBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const options = (0, pick_1.default)(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
     const result = yield booking_service_1.BookingService.GetUserOwnBooking(+req.params.userId, options);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: "GET All Booking Services!!",
+        message: "GET User Booking!!",
         meta: result.meta,
         data: result.data
     });
@@ -72,5 +99,8 @@ exports.BookingController = {
     GetAllBooking,
     GetUserOwnBooking,
     UpdateBooking,
-    DeleteBooking
+    DeleteBooking,
+    IsServiceAlreadyBookThisUser,
+    CreateReview,
+    GetAllReviews
 };

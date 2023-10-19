@@ -33,6 +33,7 @@ model User {
   booking             Booking[]
   review              Review[]
   feedback Feedback[]
+  addToCart AddToCart[]
 }
 
 model Service {
@@ -49,6 +50,7 @@ model Service {
   rating          Int?
   booking         Booking[]
   review          Review[]
+  addToCart AddToCart[]
 }
 
 model Booking {
@@ -99,6 +101,16 @@ model Feedback {
   userId    Int
   comment String?
   suggestion String?
+  user      User     @relation(fields: [userId], references: [id])
+  createAt  DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model AddToCart {
+  id        Int      @id @default(autoincrement()) 
+  userId    Int
+  serviceId Int
+  service   Service  @relation(fields: [serviceId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
   createAt  DateTime @default(now())
   updateAt  DateTime @updatedAt

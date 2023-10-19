@@ -1,4 +1,4 @@
-import { Prisma, Service } from "@prisma/client";
+import { AddToCart, Prisma, Service } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import { IPaginationOptions } from "../../../interfaces/pagination";
 import { paginationHelpers } from "../../../helpers/paginationHelper";
@@ -8,6 +8,38 @@ import httpStatus from "http-status";
 const CreateService = async (data: Service) => {
     const result = await prisma.service.create({
         data,
+    });
+    return result;
+}
+
+const CreateAddToCart = async (data: AddToCart) => {
+    const isExist = await prisma.addToCart.findFirst({
+        where: {
+            userId: data.userId,
+            serviceId:data.serviceId
+        }
+    })
+
+    if (isExist) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'This Service Already Added In cart');
+    }
+
+    const result = await prisma.addToCart.create({
+        data,
+    });
+
+    return result;
+}
+
+const GetAllAddToCart = async (userId:number) => {
+    const result = await prisma.addToCart.findMany({
+        where:{
+            userId: userId
+        },
+        include:{
+            user:true,
+            service:true,
+        }
     });
     return result;
 }
@@ -301,5 +333,7 @@ export const ServiceService = {
     UpdateService,
     DeleteService,
     GetAllAvailableServices,
-    GetAllUpComingServices
+    GetAllUpComingServices,
+    CreateAddToCart,
+    GetAllAddToCart
 }

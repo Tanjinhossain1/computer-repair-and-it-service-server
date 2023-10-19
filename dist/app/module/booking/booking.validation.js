@@ -30,7 +30,22 @@ const update = zod_1.z.object({
         bookStatus: zod_1.z.string().optional(),
     })
 });
+const reviewCreate = zod_1.z.object({
+    body: zod_1.z.object({
+        serviceId: zod_1.z.number({
+            required_error: "service id is required"
+        }),
+        userId: zod_1.z.number({
+            required_error: "user id is required"
+        }),
+        review: zod_1.z.string({
+            required_error: "review is required"
+        }),
+        rating: zod_1.z.number().optional(),
+    })
+});
 exports.BookingValidation = {
     create,
-    update
+    update,
+    reviewCreate
 };
