@@ -176,7 +176,7 @@ export const DeleteService = async (id: number) => {
 
 export const GetAllAvailableServices = async (filters: { searchTerm?: string,minPrice?:string,maxPrice?:string },
     options: IPaginationOptions) => {
-    const serviceSearchAbleFields = ['title', "status", "category",'description','serviceLocation','minPrice','maxPrice'];
+    const serviceSearchAbleFields = ['title', "status", "category",'description','serviceLocation'];
 
     const { page, limit, skip } = paginationHelpers.calculatePagination(options);
     const { searchTerm,minPrice,maxPrice, ...filterData } = filters;
